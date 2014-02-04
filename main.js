@@ -6,38 +6,16 @@
 		this.vegan = vegan;
 		this.glutenFree = glutenFree;
 		this.citrusFree = citrusFree;
-
 	};
 
 	FoodItem.prototype.toString = function(){
 		return this.name + ', both organic and nutritious! \n'
 		  + '\tCalories: '+this.calories+'\n'
 		  + '\tVegan: '+this.vegan+'\n'
-		  + '\tGluten Free?: '+this.glutenFree+'\n'
-		  + '\tCitrus Free?: '+this.citrusFree+'\n';
+		  + '\tGluten Free: '+this.glutenFree+'\n'
+		  + '\tCitrus Free: '+this.citrusFree+'\n';
 	};
-
-	var carrot = new FoodItem('Carrot',10,true,true,true);
-	var steak = new FoodItem('Steak',1000,false,true,true);
-	var spc = new FoodItem('Sour Patch Candy',500,false,true,false);
-	var almond = new FoodItem('Almond',50,true,true,true);
-	var lemon = new FoodItem('Lemon',80,true,true,false);
-	var mushroom = new FoodItem('Mushroom',10,true,true,true);
-	var chicken = new FoodItem('Chicken',400,false,true,true);
-	var tortilla = new FoodItem('Tortilla',300,false,false,true);
-	var bean = new FoodItem('Bean',200,true,true,true);
-	var sourcream = new FoodItem('Sour Cream',250,false,true,true);
-	var guacamole = new FoodItem('Guacamole',300,true,true,true);
-	var tequila = new FoodItem('Tequila',100,true,true,true);
-	var triplesec = new FoodItem('Triple Sec',100,true,true,false);
-	var limejuice = new FoodItem('Lime Juice',100,true,true,false);;
-	var olives = new FoodItem('Olives',250,true,true,true);
-	var baguette = new FoodItem('Sourdough Baguette',600,true,false,true);
-	var tacoSauce = new FoodItem('Pineapple Mango',100,true,true,false);
-	var queso = new FoodItem('American Cheese',500,false,true,true);
-	var salt = new FoodItem('Salt',0,true,true,true);
-
-
+	///HERE BEGINS DRINKS
 	var Drink = function(name, description, price, ingredients){
 		this.name = name;
 		this.description = description;
@@ -56,7 +34,7 @@
 		  + '\tIngredients: \n'+ingredientsString+'\n';
 	};
 
-
+	///HERE BEGINS PLATE STUFF
 	var Plate = function(name, description, price, ingredients){
 		this.name = name;
 		this.description = description;
@@ -78,7 +56,6 @@
 	Plate.prototype.isVegan = function () {
 		isVegan = true;
 		for (var i = 0; i < this.ingredients.length; i++) {
-			console.log(this.ingredients[i]);
 			this.ingredients[i].vegan ? isVegan : isVegan = false;
 		};
 		return isVegan;
@@ -87,7 +64,6 @@
 	Plate.prototype.isCitrusFree = function () {
 		isCitrusFree = true;
 		for (var i = 0; i < this.ingredients.length; i++) {
-			console.log(this.ingredients[i]);
 			this.ingredients[i].citrusFree ? isCitrusFree : isCitrusFree = false;
 		};
 		return isCitrusFree;
@@ -96,13 +72,12 @@
 	Plate.prototype.isGlutenFree = function () {
 		isGlutenFree = true;
 		for (var i = 0; i < this.ingredients.length; i++) {
-			console.log(this.ingredients[i]);
 			this.ingredients[i].glutenFree ? isGlutenFree : isGlutenFree = false;
 		};
 		return isGlutenFree;
 	};
 
-
+	///HERE BEINGS ORDER STUFF
 	var Order = function(arrPlates){
 		this.arrPlates = arrPlates
 	}
@@ -114,7 +89,7 @@
 		};
 		return plateString;
 	};
-
+	///MENU SUTFF
 	var Menu = function(arrPlates){
 		this.arrPlates = arrPlates;
 		console.log(this.arrPlates);
@@ -127,7 +102,7 @@
 		};
 		return plateString;
 	};
-
+	///RESTAURANT
 	var Restaurant = function(name, description, menu){
 		this.name = name;
 		this.description = description;
@@ -139,10 +114,31 @@
 		  + '\tDescription: '+this.description+'\n'
 		  + '\tMenu: '+this.menu.toString()+'\n'
 	};
-
+	///STUPID CUSTOMERS
 	var Customer = function(dietaryPreference){
 		this.dietaryPreference = dietaryPreference
 	}
+
+	///START
+	var carrot = new FoodItem('Carrot',10,true,true,true);
+	var steak = new FoodItem('Steak',1000,false,true,true);
+	var spc = new FoodItem('Sour Patch Candy',500,false,true,false);
+	var almond = new FoodItem('Almond',50,true,true,true);
+	var lemon = new FoodItem('Lemon',80,true,true,false);
+	var mushroom = new FoodItem('Mushroom',10,true,true,true);
+	var chicken = new FoodItem('Chicken',400,false,true,true);
+	var tortilla = new FoodItem('Tortilla',300,false,false,true);
+	var bean = new FoodItem('Bean',200,true,true,true);
+	var sourcream = new FoodItem('Sour Cream',250,false,true,true);
+	var guacamole = new FoodItem('Guacamole',300,true,true,true);
+	var tequila = new FoodItem('Tequila',100,true,true,true);
+	var triplesec = new FoodItem('Triple Sec',100,true,true,false);
+	var limejuice = new FoodItem('Lime Juice',100,true,true,false);;
+	var olives = new FoodItem('Olives',250,true,true,true);
+	var baguette = new FoodItem('Sourdough Baguette',600,true,false,true);
+	var tacoSauce = new FoodItem('Pineapple Mango',100,true,true,false);
+	var queso = new FoodItem('American Cheese',500,false,true,true);
+	var salt = new FoodItem('Salt',0,true,true,true);
 
 
 
@@ -159,5 +155,5 @@
 
 	var ourmenu = new Menu([steak,carrotCasserole,burrito,margarita,frenchy,beans,chicken,dip,dessert]);
 
-	var ourrestaurant = new Restaurant('Jasher\'s Fusion','Offers ethically/morally/responsibly/locally raised food products',ourmenu.toString())
+	var ourrestaurant = new Restaurant('Jasher\'s Fusion','Offers ethically/morally/responsibly/locally raised food products',ourmenu)
 	
