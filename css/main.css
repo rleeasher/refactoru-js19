@@ -1,0 +1,95 @@
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; padding: 0; border:none;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #e0e0e0;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #e0e0e0;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #e0e0e0;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #e0e0e0;
+}
+
+a {
+	text-decoration: none;
+	color: #808080;
+}
+
+ul {
+	list-style: none; 
+
+}
+
+.remove-css {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+.hidden {
+	display: none;
+}
+
+/*main container*/
+
+#main-container {
+	max-width: 60%;
+	margin: 0 auto;
+};
+
+
+
+/*food items*/
+.food-item {
+
+}
+
+.food-ingredient {
+	display: inline-block;
+	padding-left: 10px;
+	font-family: sans-serif;
+}
+
+.add-button {
+	padding: 4px 15px;
+	font-size: 12px;
+	border-radius: 3px;
+	margin-left: 10px;
+	margin-top: 10px;
+	border: 1px solid gray;
+	box-shadow: 1px 1px #888888;
+	font-weight: normal;
+	background: linear-gradient(white,gray);
+	outline: 0;
+}
+
+.add-button:hover {
+	background: linear-gradient(lightgray,gray);
+}
+
+.add-button:active {
+	position: relative;
+	top:1px;
+}
+
+.stats-container{
+	display: block;
+}
+.stats{
+	display: inline-block;
+	padding: 0px 20px;
+}
+
+.delete-order-item{
+	padding-right: 50px;
+	color: lightgray;
+	cursor: pointer;
+}
+
+
+

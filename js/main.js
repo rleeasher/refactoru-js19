@@ -1,3 +1,5 @@
+	var mainContainer = $("#bb-bookblock");
+	var orderContainer = $("#order");
 
 	//use date index to find current date through nicedate
 	var FoodItem = function (name, calories, vegan, glutenFree, citrusFree) {
@@ -9,12 +11,18 @@
 	};
 
 	FoodItem.prototype.toString = function(){
-		return this.name + ', both organic and nutritious! \n'
-		  + '\tCalories: '+this.calories+'\n'
-		  + '\tVegan: '+this.vegan+'\n'
-		  + '\tGluten Free: '+this.glutenFree+'\n'
-		  + '\tCitrus Free: '+this.citrusFree+'\n';
+		return this.name;
+		// return this.name + ', both organic and nutritious! \n'
+		//   + '\tCalories: '+this.calories+'\n'
+		//   + '\tVegan: '+this.vegan+'\n'
+		//   + '\tGluten Free: '+this.glutenFree+'\n'
+		//   + '\tCitrus Free: '+this.citrusFree+'\n';
 	};
+
+	FoodItem.prototype.create = function(){
+		return '<pre class="food-ingredient">{0}</pre>'.supplant([this.toString()]);
+	}
+
 	///HERE BEGINS DRINKS
 	var Drink = function(name, description, price, ingredients){
 		this.name = name;
@@ -31,8 +39,17 @@
 		return this.name + ', both boozy and delicious! \n'
 		  + '\tDescription: '+this.description+'\n'
 		  + '\tPrice: '+this.price+'\n'
-		  + '\tIngredients: \n'+ingredientsString+'\n';
+		  + '\tIngredients: \n'+ingredientsString+'\n';	  
 	};
+
+
+	Drink.prototype.create = function(){
+		var str = "";
+		for (var i = 0; i < this.ingredients.length; i++) {
+			str += this.ingredients[i].create();
+		};
+		return '<div class="bb-item"><h2 class="menu-item">{0}</h2><div class="food-item">{1}<button type="button" class="add-button">Add</button></div></div>'.supplant([this.name,str]);
+	}
 
 	///HERE BEGINS PLATE STUFF
 	var Plate = function(name, description, price, ingredients){
@@ -54,45 +71,73 @@
 	};
 
 	Plate.prototype.isVegan = function () {
-		isVegan = true;
+		isVegan = "";
 		for (var i = 0; i < this.ingredients.length; i++) {
-			this.ingredients[i].vegan ? isVegan : isVegan = false;
+			this.ingredients[i].vegan ? isVegan = "No" : isVegan = "Yes";
 		};
 		return isVegan;
 	};
 
 	Plate.prototype.isCitrusFree = function () {
-		isCitrusFree = true;
+		isCitrusFree = "";
 		for (var i = 0; i < this.ingredients.length; i++) {
-			this.ingredients[i].citrusFree ? isCitrusFree : isCitrusFree = false;
+			this.ingredients[i].citrusFree ? isCitrusFree = "No" : isCitrusFree = "Yes";
 		};
 		return isCitrusFree;
 	};
 
 	Plate.prototype.isGlutenFree = function () {
-		isGlutenFree = true;
+		isGlutenFree = "";
 		for (var i = 0; i < this.ingredients.length; i++) {
-			this.ingredients[i].glutenFree ? isGlutenFree : isGlutenFree = false;
+			this.ingredients[i].glutenFree ? isGlutenFree = "No" : isGlutenFree = "Yes";
 		};
 		return isGlutenFree;
 	};
+
+	Plate.prototype.calories = function(){
+		var totalCal = 0;
+		for(var i=0;i < this.ingredients.length ;i++){
+			totalCal += this.ingredients[i].calories;
+		}
+		return totalCal;
+	}
+
+	Plate.prototype.create = function(){
+		var str = "";
+		for (var i = 0; i < this.ingredients.length; i++) {
+			str += this.ingredients[i].create();
+		};
+		var stats = "<div class='stats-container'><div class='stats'>Calories: {0}</div><div class='stats'>Vegan: {1}</div><div class='stats'>Gluten Free: {2}</div><div class='stats'>Citrus Free: {3}</div></div>".supplant([this.calories(),this.isVegan(),this.isCitrusFree(),this.isGlutenFree()]);
+		return '<div class="bb-item"><h2 class="menu-item">{0}</h2><div class="food-item">{1}{2}<button type="button" class="add-button">Add</button></div></div>'.supplant([this.name,str, stats]);
+	}
+
 
 	///HERE BEINGS ORDER STUFF
 	var Order = function(arrPlates){
 		this.arrPlates = arrPlates
 	}
 
-	Order.prototype.toString = function(){
-		var plateString = "";
+	Order.prototype.toArray = function(){
+		var plateArr = [];
 		for (var i = 0; i < this.arrPlates.length; i++) {
-			platesString += this.arrPlates[i].toString();
+			plateArr.push(this.arrPlates[i].name);
 		};
-		return plateString;
+		return plateArr;
 	};
+
+	Order.prototype.create = function(){
+		var str = "";
+		var arr = this.toArray();
+		for (var i = 0; i < arr.length; i++) {
+			str += '<li><span class="delete-order-item">x</span>'+arr[i]+'</li>';
+		};
+
+		return $('<div class="order"><ul>{0}</ul></div>'.supplant([str]));
+	}
+
 	///MENU SUTFF
 	var Menu = function(arrPlates){
 		this.arrPlates = arrPlates;
-		console.log(this.arrPlates);
 	}
 
 	Menu.prototype.toString = function(){
@@ -101,7 +146,23 @@
 			plateString += (this.arrPlates[i].toString());
 		};
 		return plateString;
-	};
+	}
+
+	// Menu.prototype.toArray = function(){
+	// 	var plateArr = [];
+	// 	for (var i = 0; i < this.arrPlates.length; i++) {
+	// 		plateArr.push(this.arrPlates[i]);
+	// 	};
+	// 	return plateArr;
+	// };
+
+	Menu.prototype.create = function () {
+		var str = ""; 
+		for (var i = 0; i < this.arrPlates.length; i++) {
+			str += this.arrPlates[i].create();
+		};
+		return str;
+	}
 	///RESTAURANT
 	var Restaurant = function(name, description, menu){
 		this.name = name;
@@ -153,7 +214,27 @@
 	var guacamoleplate = new Plate('Guacamole','Plain avacados: no salt',100,[guacamole]);
 	var dessert = new Plate('SPC fusion','An amazing combination sour candy and taco sauce',7,[spc,tacoSauce,triplesec,lemon,mushroom]);
 
-	var ourmenu = new Menu([steak,carrotCasserole,burrito,margarita,frenchy,beans,chicken,dip,dessert]);
+	var ourmenu = new Menu([steakplate,carrotCasserole,burrito,margarita,frenchy,beans,chicken,dip,dessert]);
 
 	var ourrestaurant = new Restaurant('Jasher\'s Fusion','Offers ethically/morally/responsibly/locally raised food products',ourmenu)
+
+	// var ourorder = new Order([steakplate,carrotCasserole,burrito]);
+
+	mainContainer.append(ourmenu.create());
+	// orderContainer.append(ourorder.create());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
