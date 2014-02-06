@@ -34,15 +34,26 @@ ul {
 .hidden {
 	display: none;
 }
+/*main-bar*/
+.main-menu{
+	background-color: red;
+}
 
+.restaurant-name{
+	color: #fff;
+	padding: 10px;
+	text-align: center;
+}
 /*main container*/
 
 #main-container {
 	max-width: 60%;
 	margin: 0 auto;
-};
+}
 
-
+#customer-prefs{
+	padding-left: 32%;
+}
 
 /*food items*/
 .food-item {

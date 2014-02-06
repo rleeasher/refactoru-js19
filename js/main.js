@@ -71,25 +71,25 @@
 	};
 
 	Plate.prototype.isVegan = function () {
-		isVegan = "";
+		isVegan = "Yes";
 		for (var i = 0; i < this.ingredients.length; i++) {
-			this.ingredients[i].vegan ? isVegan = "No" : isVegan = "Yes";
+			this.ingredients[i].vegan ? isVegan : isVegan = "No";
 		};
 		return isVegan;
 	};
 
 	Plate.prototype.isCitrusFree = function () {
-		isCitrusFree = "";
+		isCitrusFree = "Yes";
 		for (var i = 0; i < this.ingredients.length; i++) {
-			this.ingredients[i].citrusFree ? isCitrusFree = "No" : isCitrusFree = "Yes";
+			this.ingredients[i].citrusFree ? isCitrusFree : isCitrusFree = "No";
 		};
 		return isCitrusFree;
 	};
 
 	Plate.prototype.isGlutenFree = function () {
-		isGlutenFree = "";
+		isGlutenFree = "Yes";
 		for (var i = 0; i < this.ingredients.length; i++) {
-			this.ingredients[i].glutenFree ? isGlutenFree = "No" : isGlutenFree = "Yes";
+			this.ingredients[i].glutenFree ? isGlutenFree : isGlutenFree = "No";
 		};
 		return isGlutenFree;
 	};
@@ -107,7 +107,7 @@
 		for (var i = 0; i < this.ingredients.length; i++) {
 			str += this.ingredients[i].create();
 		};
-		var stats = "<div class='stats-container'><div class='stats'>Calories: {0}</div><div class='stats'>Vegan: {1}</div><div class='stats'>Gluten Free: {2}</div><div class='stats'>Citrus Free: {3}</div></div>".supplant([this.calories(),this.isVegan(),this.isCitrusFree(),this.isGlutenFree()]);
+		var stats = "<div class='stats-container'><div class='stats'>Calories: {0}</div><div class='stats'>Vegan: {1}</div><div class='stats'>Gluten Free: {2}</div><div class='stats'>Citrus Free: {3}</div><div class='stats'>Price: {4}</div></div>".supplant([this.calories(),this.isVegan(),this.isGlutenFree(),this.isCitrusFree(),this.price]);
 		return '<div class="bb-item"><h2 class="menu-item">{0}</h2><div class="food-item">{1}{2}<button type="button" class="add-button">Add</button></div></div>'.supplant([this.name,str, stats]);
 	}
 
@@ -120,19 +120,23 @@
 	Order.prototype.toArray = function(){
 		var plateArr = [];
 		for (var i = 0; i < this.arrPlates.length; i++) {
-			plateArr.push(this.arrPlates[i].name);
+			plateArr.push(this.arrPlates[i]);
 		};
 		return plateArr;
 	};
 
 	Order.prototype.create = function(){
 		var str = "";
+		var totalcals = 0;
+		var totalprice = 0;
 		var arr = this.toArray();
 		for (var i = 0; i < arr.length; i++) {
-			str += '<li><span class="delete-order-item">x</span>'+arr[i]+'</li>';
+			totalprice += arr[i].price;
+			totalcals += arr[i].calories();
+			str += '<li class="order-item"><span data-id="'+i+'" class="delete-order-item">x</span>'+arr[i].name+'</li>';
 		};
 
-		return $('<div class="order"><ul>{0}</ul></div>'.supplant([str]));
+		return $('<div class="order"><ul>{0}</ul><div class="calories">Total Calories: {1}</div><div class="totalprice">Total Price: {2}</div></div>'.supplant([str,totalcals,totalprice]));
 	}
 
 	///MENU SUTFF
@@ -214,7 +218,9 @@
 	var guacamoleplate = new Plate('Guacamole','Plain avacados: no salt',100,[guacamole]);
 	var dessert = new Plate('SPC fusion','An amazing combination sour candy and taco sauce',7,[spc,tacoSauce,triplesec,lemon,mushroom]);
 
-	var ourmenu = new Menu([steakplate,carrotCasserole,burrito,margarita,frenchy,beans,chicken,dip,dessert]);
+	var menu = [steakplate,carrotCasserole,burrito,margarita,frenchy,beans,chickenplate,dip,guacamoleplate,dessert];
+	var ourmenu = new Menu(menu);
+	console.log(menu.length);
 
 	var ourrestaurant = new Restaurant('Jasher\'s Fusion','Offers ethically/morally/responsibly/locally raised food products',ourmenu)
 
