@@ -28,6 +28,17 @@ ul {
 	list-style: none; 
 
 }
+.bb-page > div,
+.bb-outer,
+.bb-content,
+.bb-inner, .bb-item {
+	background-color: #1abc9c;
+	border-radius: 10px;
+}
+
+.menu-item{
+	text-align: center;
+}
 
 .remove-css {
 	border: none;
@@ -98,6 +109,9 @@ ul {
 	font-weight: normal;
 	background: linear-gradient(white,gray);
 	outline: 0;
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
 }
 
 .add-button:hover {
@@ -111,10 +125,13 @@ ul {
 
 .stats-container{
 	display: block;
+	position: relative;
+	top: 45px;
+
 }
 .stats{
 	display: inline-block;
-	padding: 0px 20px;
+	padding: 5px 25px;
 }
 
 .delete-order-item{
