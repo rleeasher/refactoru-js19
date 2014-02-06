@@ -101,6 +101,12 @@ ul {
 	color: lightgray;
 	cursor: pointer;
 }
+ /*order shit*/
 
+ #order {
+ 	position: fixed;
+ 	top: 20%;
+ 	left: 0;
+ }
 
 
