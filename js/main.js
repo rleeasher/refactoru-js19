@@ -136,7 +136,7 @@
 			str += '<li class="order-item"><span data-id="'+i+'" class="delete-order-item">x</span>'+arr[i].name+'</li>';
 		};
 
-		return $('<div class="order"><ul>{0}</ul><div class="calories">Total Calories: {1}</div><div class="totalprice">Total Price: {2}</div></div>'.supplant([str,totalcals,totalprice]));
+		return $('<div class="orders"><h3>Ordered Items</h3><ul>{0}</ul><div class="calories">Total Calories: {1}</div><div class="totalprice">Total Price: {2}</div></div>'.supplant([str,totalcals,totalprice]));
 	}
 
 	///MENU SUTFF
@@ -209,7 +209,7 @@
 
 	var steakplate = new Plate('Steak du jour','A succulent mignon',70,[steak,almond,mushroom,tacoSauce]);
 	var carrotCasserole = new Plate('Carrot Casserole','A savory glazed carrot infusion',20,[carrot,lemon,baguette]);
-	var burrito = new Plate('Burrito','A tasty gas producing monster',35,[tortilla,bean,sourcream,guacamole,olives,tacoSauce,queso,chicken,steak,salt]);
+	var burrito = new Plate('Burrito','A tasty gas producing monster',35,[tortilla,bean,sourcream,guacamole,olives,tacoSauce,queso,chicken]);
 	var margarita = new Plate('Margarita','The Walk of Shame',18,[tequila,limejuice,salt,triplesec]);
 	var frenchy = new Plate('Frenchy','Louvre',58,[baguette,queso]);
 	var beans = new Plate('Beans','Imported Mashed Beans',1,[bean,salt]);

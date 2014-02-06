@@ -15,6 +15,10 @@
     color:    #e0e0e0;
 }
 
+body {
+	background-color: #16a085;
+}
+
 a {
 	text-decoration: none;
 	color: #808080;
@@ -36,7 +40,7 @@ ul {
 }
 /*main-bar*/
 .main-menu{
-	background-color: red;
+	background-color: #27ae60;
 }
 
 .restaurant-name{
@@ -52,7 +56,24 @@ ul {
 }
 
 #customer-prefs{
-	padding-left: 32%;
+	padding: 2% 0px 2% 33%;
+}
+
+.bb-bookblock{
+	margin: 120px auto 0px auto;
+}
+
+
+#navBar{
+	text-align: center;
+	padding-top: 15px;
+	padding-left: 20px;
+}
+
+.bb-custom-icon{
+	color: #2980b9;
+	padding-right: 25px;
+	padding-left: 5px;
 }
 
 /*food items*/
@@ -103,10 +124,14 @@ ul {
 }
  /*order shit*/
 
- #order {
+ .orders {
  	position: fixed;
  	top: 20%;
- 	left: 0;
+ 	left: 3%;
+ 	background-color: #2ecc71;
+ 	border-radius: 5px;
+	padding: 5px 20px 10px 10px;
+	min-width: 250px;
  }
 
 
